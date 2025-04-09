@@ -5,7 +5,6 @@ const HomePage = () => {
   return (
     <div>
       <Home />
-      <div className='h-[1000px]'></div>
     </div>
   );
 };

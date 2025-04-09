@@ -1,12 +1,38 @@
+'use client';
 import { navLinks } from '@/constant/constant';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HiBars3BottomRight } from 'react-icons/hi2';
 import { TbAirBalloon } from 'react-icons/tb';
 
-const Nav = () => {
+type Props = {
+    handleShowNav: () => void;
+};
+
+const Nav = ({handleShowNav}: Props) => {
+    
+    const [navBg, setNavBg] = useState(false);
+
+    useEffect(() => {
+        const handler = () => {
+            if(window.scrollY >= 90){
+                setNavBg(true);
+            }
+
+            if(window.scrollY < 90){
+                setNavBg(false);
+            }
+        }
+
+        window.addEventListener('scroll', handler);
+
+        return () => window.removeEventListener('scroll', handler);
+        
+    }, []);
+
+
     return (
-        <div className='bg-blue-950 transition-all duration-200 h-[12vh] z-[1000] fixed w-full'>
+        <div className={`${navBg && 'bg-blue-950 shadow-md'} transition-all duration-200 h-[12vh] z-[1000] fixed w-full`}>
             <div className='flex items-center justify-between h-full w-[90%] sm:w-[80%] mx-auto'>
                 {/* logo */}
                 <div className='flex items-center space-x-2 cursor-pointer'>
@@ -31,7 +57,7 @@ const Nav = () => {
                     <button className='px-8 py-2 md:px-12 md:py-2.5 text-black text-base bg-white hover:bg-gray-200 transition-all duration-200 rounded-lg cursor-pointer'>Book Now</button>
 
                     {/* burger menu button */}
-                    <HiBars3BottomRight className='w-8 h-8 cursor-pointer text-white lg:hidden'/>
+                    <HiBars3BottomRight onClick={handleShowNav} className='w-8 h-8 cursor-pointer text-white lg:hidden'/>
                 </div>
             </div>
         </div>
