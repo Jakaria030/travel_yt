@@ -9,7 +9,7 @@ const Destination = () => {
             <SectionHeading heading='Exploring Populer Destination' />
 
             {/* section content */}
-            <div className='mt-14 w-[80%] mx-auto'>
+            <div className='mt-16 w-[80%] mx-auto'>
                 <DestinationSlider />
             </div>
 
